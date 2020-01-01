@@ -1,0 +1,18 @@
+h1 {
+  text-align: center;
+}
+
+#map {
+  width: 100%;
+  margin: auto;
+  height: 500px;
+}
+
+.img-content{
+  height: 100%;
+  width: 100%;
+}
+
+p{
+  white-space: pre-wrap;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>map view page</title>
+  </head>
+  <body>
+    <h1>My Google Map</h1>
+    <div id="map">
+
+    </div>
+    <script>
+  function initMap(){
+    // Map options
+    var options = {
+      zoom:2,
+      center: {lat:48.0196, lng:66.9237},
+      gestureHandling: 'cooperative'
+    }
+
+    // New map
+    var map = new google.maps.Map(document.getElementById('map'), options);
+
+    // Listen for click on map
+    // google.maps.event.addListener(map, 'click', function(event){
+    //   // Add marker
+    //   addMarker({coords:event.latLng});
+    // });
+
+    /*
+    // Add marker
+    var marker = new google.maps.Marker({
+      position:{lat:42.4668,lng:-70.9495},
+      map:map,
+      icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+    });
+
+    var infoWindow = new google.maps.InfoWindow({
+      content:'<h1>Lynn MA</h1>'
+    });
+
+    marker.addListener('click', function(){
+      infoWindow.open(map, marker);
+    });
+    */
+
+    // Array of markers
+    var markers = [
+      {
+        coords: {lat:43.066666, lng:141.350006},
+        content: '<div>'+
+                  '<h4>Sapporo</h4>'+
+                  '<img src="img/seafood.jpg" alt="seafood" class="img-content"/>'+
+                  '<p>Sapporo is renowned for the high quality and freshness of its seafood,as the cold waters surrounding Japan\'s northernmost prefecture are ideal for fish'+
+                    'and sea vegetation. Within the prefecture some areas are particularly famous for a certain'+
+                     'product, such as the uni (sea urchin) of Rishiri and Rebun.</p>'+
+                  '</div>',
+        iconImage: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
+      },
+      {
+        coords: {lat:67.9222, lng:26.5046},
+        content: '<div>'+
+                  '<h4>Lapland</h4>'+
+                  '<img src="img/igloo-hotel.jpg" class="img-content" alt="igloo"/>'+
+                  '<p>At the Kakslauttanen resort, guests can sleep under the Arctic sky and experience'+
+                       'the magical wonder of the Northern Lights from the comfort of their bed. With over'+
+                        '170 accommodations, this resort offers a variety of sleeping options, from charming log'+
+                         'cabins to glass igloos. Beyond the luxury rooms and views, the resort has five smoke'+
+                          'saunas, two restaurants and access to ice fishing, snowmobiling and cross-country skiing'+
+                           'in one of Finland’s largest national parks, Urho Kekkonen. </p>'+
+                  '</div>',
+        iconImage: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+      },
+      {
+        coords: {lat:12.972442, lng:77.580643},
+        content: '<div>'+
+                  '<h4>Bangalore</h4>'+
+                  '<img src="img/breweries.jpg" class="img-content" alt="brewrie"/>'+
+                  '<p>Bangalore (Bengaluru) is a large city, the capital of Karnataka state,'+
+                  'India. Bangalore is an old and beautiful city, with plenty'+
+                   'of attractions, cultural and architectural relics, religious buildings, etc.'+
+                   'Bangalore\’s love for beer is clearly evident from the rising number of microbreweries'+
+                    'in the city during recent years. The breweries in Bangalore have gained their fair share of'+
+                     'fame for coming up with some of the best stouts, ales and lagers you\'ll ever have.</p>'+
+                  '</div>',
+        iconImage: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+      }
+    ];
+
+    // Loop through markers
+    for(var i = 0;i < markers.length;i++){
+      // Add marker
+      addMarker(markers[i]);
+    }
+
+    // Add Marker Function
+    function addMarker(props){
+      var marker = new google.maps.Marker({
+        position:props.coords,
+        map:map,
+
+      });
+
+      // Check for customicon
+      if(props.iconImage){
+        // Set icon image
+        marker.setIcon(props.iconImage);
+      }
+
+      // Check content
+      if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+          content:props.content,
+          maxWidth: 200
+        });
+
+        marker.addListener('click', function(){
+          infoWindow.open(map, marker);
+          map.setZoom(12);
+        });
+      }
+    }
+  }
+</script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2Nx_FNMYapXVSK3W_G2plvHhJyLgnRKA&callback=initMap"
+></script>
+  </body>
+</html>
