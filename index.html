@@ -13,6 +13,7 @@
     </div>
     <p>Displaying the NorthEast & SouthWest Coordinates below</p>
     <p id="bounds"></p>
+    <p id="checking"></p>
     <script>
 
   function initMap(){
@@ -33,14 +34,14 @@
       drawingControl: true,
       drawingControlOptions: {
         position: google.maps.ControlPosition.TOP_CENTER,
-        drawingModes: 'rectangle'
+        drawingModes: ['rectangle']
       },
       rectangleOptions: {
         strokeColor: '#6c6c6c',
         strokeWeight: 3.5,
         fillColor: '#926239',
         fillOpacity: 0.6,
-        editable: true,
+        editable: false,
         draggable: false
       }
     });
@@ -52,14 +53,30 @@
       rectangle = overlay;
       drawingManager.setOptions({
         drawingMode: null,
-        drawingControl: false
+        drawingControl: true
       });
-      var bounds = overlay.overlay.getBounds();
+
+      var bounds = rectangle.overlay.getBounds();
       var start = bounds.getNorthEast();
       var end = bounds.getSouthWest();
 
-      console.log('NorthEast:' + start.toUrlValue(4), 'SouthWest:' + end.toUrlValue(4));
-      document.getElementById("bounds").innerHTML = ('NorthEast:' + start.toUrlValue(4) + ' ' + 'SouthWest:' + end.toUrlValue(4))
+      // checking one point is indside or not
+      var point = new google.maps.LatLng(67.9222, 26.5046);
+      
+      var isWithinRectangle = rectangle.overlay.getBounds().contains(point);
+      if (isWithinRectangle) {
+        console.log("it's inside");
+        // document.getElementById("checking").innerHTML = ('NorthEast:' + start.toUrlValue(6) + ' ' + 'SouthWest:' + end.toUrlValue(4) + ' is inside of ' + point);
+        document.getElementById("checking").innerHTML = ('Marker is inside of the drawn rectangle');
+      }else{
+        console.log("it'soutside");
+        // document.getElementById("checking").innerHTML = ('NorthEast:' + start.toUrlValue(6) + ' ' + 'SouthWest:' + end.toUrlValue(4) + ' is outside of ' + point);
+        document.getElementById("checking").innerHTML = ('Marker is outside of the rectangle')
+      }
+
+      console.log(bounds + 'this is bounds');
+      console.log('NorthEast:' + start.toUrlValue(6), 'SouthWest:' + end.toUrlValue(6));
+      document.getElementById("bounds").innerHTML = ('NorthEast:' + start.toUrlValue(6) + ' ' + 'SouthWest:' + end.toUrlValue(4));
     });
 
 
