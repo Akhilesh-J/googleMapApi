@@ -62,16 +62,16 @@
 
       // checking one point is indside or not
       var point = new google.maps.LatLng(67.9222, 26.5046);
-      
+
       var isWithinRectangle = rectangle.overlay.getBounds().contains(point);
       if (isWithinRectangle) {
         console.log("it's inside");
         // document.getElementById("checking").innerHTML = ('NorthEast:' + start.toUrlValue(6) + ' ' + 'SouthWest:' + end.toUrlValue(4) + ' is inside of ' + point);
-        document.getElementById("checking").innerHTML = ('Marker is inside of the drawn rectangle');
+        document.getElementById("checking").innerHTML = ( point +' Lapland Marker is inside of the drawn rectangle');
       }else{
         console.log("it'soutside");
         // document.getElementById("checking").innerHTML = ('NorthEast:' + start.toUrlValue(6) + ' ' + 'SouthWest:' + end.toUrlValue(4) + ' is outside of ' + point);
-        document.getElementById("checking").innerHTML = ('Marker is outside of the rectangle')
+        document.getElementById("checking").innerHTML = (point + ' Lapland Marker is outside of the rectangle')
       }
 
       console.log(bounds + 'this is bounds');
